@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Dominos.OLO.Vouchers.Models;
 using Dominos.OLO.Vouchers.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Vouchers.Common.Logging;
 
 namespace Dominos.OLO.Vouchers.Controllers
 {
@@ -11,66 +14,146 @@ namespace Dominos.OLO.Vouchers.Controllers
     public class VoucherController : ControllerBase
     {
         private VoucherRepository _voucherRepository;
+        private readonly ILogger logger;
+
+        public VoucherController(ILogger logger)
+        {
+            this.logger = logger;
+        }
 
         [HttpGet]
-        [Route("")]
-        public Voucher[] Get(int count = 0)
+        [Route("all")]
+        public async Task<ActionResult<ICollection<Voucher>>> Get(int count = 0)
         {
-            var vouchers = Repository.GetVouchers();
-            if (count == 0)
+            try
             {
-                count = vouchers.Length;
-            }
-            var returnVouchers = new List<Voucher>();
-            for (var i = 0; i < count; i++)
-            {
-                returnVouchers.Add(vouchers[i]);
-            }
-            return returnVouchers.ToArray();
-        }
-
-        [Route("")]
-        public Voucher GetVoucherById(Guid id)
-        {
-            var vouchers = Repository.GetVouchers();
-            Voucher voucher = null;
-            for (var i = 0; i < vouchers.Length; i++)
-            {
-                if (vouchers[i].Id == id)
+                var vouchers = Repository.GetVouchers();
+                if (count == 0)
                 {
-                    voucher = vouchers[i];
+                    count = vouchers.Length;
                 }
-            }
-
-            return voucher;
-        }
-
-        [Route("")]
-        public Voucher[] GetVouchersByName(string name)
-        {
-            var vouchers = Repository.GetVouchers();
-            var returnVouchers = new List<Voucher>();
-            for (var i = 0; i < vouchers.Length; i++)
-            {
-                if (vouchers[i].Name == name)
+                var returnVouchers = new List<Voucher>();
+                for (var i = 0; i < count; i++)
                 {
                     returnVouchers.Add(vouchers[i]);
                 }
+                return Ok(returnVouchers);
             }
+            catch (Exception ex)
+            {
+                await logger.LogErrorAsync(ErrorLevel.Major, ex, LogEvent.FailedToGetVouchers.ToString());
 
-            return returnVouchers.ToArray();
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
-        [Route("")]
-        public Voucher[] GetVouchersByNameSearch(string search)
+        [HttpGet]
+        [Route("get/{id}")]
+        public async Task<ActionResult<Voucher>> GetVoucherById([FromRoute] Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var vouchers = Repository.GetVouchers();
+                Voucher voucher = null;
+                for (var i = 0; i < vouchers.Length; i++)
+                {
+                    if (vouchers[i].Id == id)
+                    {
+                        voucher = vouchers[i];
+                    }
+                }
+
+                if (voucher == null)
+                    return NotFound();
+
+                return Ok(voucher);
+            }
+            catch (Exception ex)
+            {
+                await logger.LogErrorAsync(ErrorLevel.Major, ex, LogEvent.FailedToGetVoucher.ToString());
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
-        [Route("")]
-        public Voucher GetCheapestVoucherByProductCode(string productCode)
+        [HttpGet]
+        [Route("get/{name}")]
+        public async Task<ActionResult<ICollection<Voucher>>> GetVouchersByName([FromRoute] string name)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    return NotFound();
+                }
+
+                var vouchers = Repository.GetVouchers();
+                var returnVouchers = new List<Voucher>();
+                for (var i = 0; i < vouchers.Length; i++)
+                {
+                    if (vouchers[i].Name == name)
+                    {
+                        returnVouchers.Add(vouchers[i]);
+                    }
+                }
+
+                return Ok(returnVouchers);
+            }
+            catch (Exception ex)
+            {
+                await logger.LogErrorAsync(ErrorLevel.Major, ex, LogEvent.GetVouchersByName.ToString());
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpGet]
+        [Route("search")]
+        public async Task<ActionResult<ICollection<Voucher>>> GetVouchersByNameSearch([FromQuery] string search)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(search))
+                {
+                    return NotFound();
+                }
+
+                var vouchers = Repository.GetVouchers();
+                var returnVouchers = new List<Voucher>();
+                for (var i = 0; i < vouchers.Length; i++)
+                {
+                    if (vouchers[i].Name == search)
+                    {
+                        returnVouchers.Add(vouchers[i]);
+                    }
+                }
+
+                return Ok(search);
+            }
+            catch (Exception ex)
+            {
+                await logger.LogErrorAsync(ErrorLevel.Major, ex, LogEvent.GetVouchersByNameSearch.ToString());
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+
+        [HttpGet]
+        [Route("getcheapest/{productcode}")]
+        public async Task<ActionResult<Voucher>> GetCheapestVoucherByProductCode([FromRoute] string productCode)
+        {
+            try
+            {
+                //Write implementation here;
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                await logger.LogErrorAsync(ErrorLevel.Major, ex, LogEvent.GetCheapestVoucherByProductCode.ToString());
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         internal VoucherRepository Repository

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vouchers.Tests.Unit", "Vouc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vouchers.Web", "Vouchers.Web\Vouchers.Web.csproj", "{CE1E35C0-E7B1-42E7-A888-4D65F9609ABA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vouchers.Common", "Vouchers.Common\Vouchers.Common.csproj", "{BA535F6B-2CFA-411D-BA64-2696989B4476}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{CE1E35C0-E7B1-42E7-A888-4D65F9609ABA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE1E35C0-E7B1-42E7-A888-4D65F9609ABA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE1E35C0-E7B1-42E7-A888-4D65F9609ABA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA535F6B-2CFA-411D-BA64-2696989B4476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA535F6B-2CFA-411D-BA64-2696989B4476}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA535F6B-2CFA-411D-BA64-2696989B4476}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA535F6B-2CFA-411D-BA64-2696989B4476}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
