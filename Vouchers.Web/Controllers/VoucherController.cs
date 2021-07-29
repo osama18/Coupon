@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.Http;
 using Dominos.OLO.Vouchers.Models;
 using Dominos.OLO.Vouchers.Repository;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Dominos.OLO.Vouchers.Controllers
 {
-    public class VoucherController : ApiController
+    [ApiController]
+    [Route("voucher/")]
+    public class VoucherController : ControllerBase
     {
         private VoucherRepository _voucherRepository;
 
+        [HttpGet]
         [Route("")]
         public Voucher[] Get(int count = 0)
         {
