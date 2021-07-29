@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dominos.OLO.Vouchers.Models
+namespace Vouchers.Business.Models
 {
     public class Voucher
     {

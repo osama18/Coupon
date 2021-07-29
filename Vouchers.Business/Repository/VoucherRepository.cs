@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.IO;
-using Dominos.OLO.Vouchers.Models;
-using Newtonsoft.Json;
+using Vouchers.Business.Models;
 
-namespace Dominos.OLO.Vouchers.Repository
+namespace Vouchers.Business.Repository
 {
     public class VoucherRepository
     {

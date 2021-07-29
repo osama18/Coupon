@@ -1,6 +1,5 @@
-﻿using Dominos.OLO.Vouchers.Models;
-using Swashbuckle.AspNetCore.Filters;
-using System.Collections.Generic;
+﻿using Swashbuckle.AspNetCore.Filters;
+using Vouchers.Business.Models;
 
 namespace Dominos.OLO.Vouchers.SwaggerExamples
 {

@@ -1,4 +1,4 @@
-﻿namespace Dominos.OLO.Vouchers.Controllers
+﻿namespace Vouchers.Web
 {
     internal enum LogEvent
     {

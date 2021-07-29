@@ -4,7 +4,7 @@
         <name>Vouchers.Web</name>
     </assembly>
     <members>
-        <member name="M:Dominos.OLO.Vouchers.Controllers.VoucherController.GetVoucherById(System.Guid)">
+        <member name="M:Vouchers.Web.Controllers.VoucherController.GetVoucherById(System.Guid)">
             <summary>
              Retrieve a voucher by id
             </summary>

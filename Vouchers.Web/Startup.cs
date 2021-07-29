@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Vouchers.Business;
+using Vouchers.Common;
 
 namespace Vouchers.Web
 {
@@ -37,7 +39,9 @@ namespace Vouchers.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
+            services.RegisterCommon();
+            services.RegisterBusiness();
+            
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {

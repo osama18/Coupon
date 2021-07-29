@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Vouchers.Business\Vouchers.Business.csproj" />
     <ProjectReference Include="..\Vouchers.Common\Vouchers.Common.csproj" />
   </ItemGroup>
 

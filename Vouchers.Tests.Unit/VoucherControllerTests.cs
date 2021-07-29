@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Dominos.OLO.Vouchers.Controllers;
-using Dominos.OLO.Vouchers.Models;
-using Dominos.OLO.Vouchers.Repository;
 using NSubstitute;
 using NUnit.Framework;
 
