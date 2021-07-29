@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dominos.OLO.Vouchers.Models;
 using Dominos.OLO.Vouchers.Repository;
+using Dominos.OLO.Vouchers.SwaggerExamples;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Filters;
 using Vouchers.Common.Logging;
 
 namespace Dominos.OLO.Vouchers.Controllers
@@ -47,6 +49,18 @@ namespace Dominos.OLO.Vouchers.Controllers
             }
         }
 
+        /// <summary>
+        ///  Retrieve a voucher by id
+        /// </summary>
+        /// <param name="id"> The unique identifier of the voucher</param>
+        /// <returns>Voucher Details</returns>
+        /// <response code="200">Success: Voucher returned</response>
+        /// <response code="404">The voucher was not found</response>
+        /// <response code="500">Internal server error: the server was unable to process the request, due to a server error.</response>       
+        [SwaggerResponseExample(200, typeof(VoucherExamples))]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet]
         [Route("get/{id}")]
         public async Task<ActionResult<Voucher>> GetVoucherById([FromRoute] Guid id)

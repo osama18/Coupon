@@ -4,5 +4,15 @@
         <name>Vouchers.Web</name>
     </assembly>
     <members>
+        <member name="M:Dominos.OLO.Vouchers.Controllers.VoucherController.GetVoucherById(System.Guid)">
+            <summary>
+             Retrieve a voucher by id
+            </summary>
+            <param name="id"> The unique identifier of the voucher</param>
+            <returns>Voucher Details</returns>
+            <response code="200">Success: Voucher returned</response>
+            <response code="404">The voucher was not found</response>
+            <response code="500">Internal server error: the server was unable to process the request, due to a server error.</response>       
+        </member>
     </members>
 </doc>
