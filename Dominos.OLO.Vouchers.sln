@@ -5,11 +5,15 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vouchers.Tests.Unit", "Vouchers.Tests.Unit\Vouchers.Tests.Unit.csproj", "{096DD5A8-7DAD-4D4F-AD1A-9C42A25DCEBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vouchers.Web", "Vouchers.Web\Vouchers.Web.csproj", "{CE1E35C0-E7B1-42E7-A888-4D65F9609ABA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vouchers.Web", "Vouchers.Web\Vouchers.Web.csproj", "{CE1E35C0-E7B1-42E7-A888-4D65F9609ABA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vouchers.Common", "Vouchers.Common\Vouchers.Common.csproj", "{BA535F6B-2CFA-411D-BA64-2696989B4476}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vouchers.Common", "Vouchers.Common\Vouchers.Common.csproj", "{BA535F6B-2CFA-411D-BA64-2696989B4476}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vouchers.Business", "Vouchers.Business\Vouchers.Business.csproj", "{63C3CCDB-E2D4-46F8-93EF-BCE07024F70C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vouchers.Business", "Vouchers.Business\Vouchers.Business.csproj", "{63C3CCDB-E2D4-46F8-93EF-BCE07024F70C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vouchers.DAL", "Vouchers.DAL\Vouchers.DAL.csproj", "{1FF4E66C-5018-40D2-A40F-12B1C7414D16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VouchersMigrationClient", "VouchersMigrationClient\VouchersMigrationClient.csproj", "{218A8B93-95D0-464B-AFB7-C674293F1BA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{63C3CCDB-E2D4-46F8-93EF-BCE07024F70C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63C3CCDB-E2D4-46F8-93EF-BCE07024F70C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63C3CCDB-E2D4-46F8-93EF-BCE07024F70C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FF4E66C-5018-40D2-A40F-12B1C7414D16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FF4E66C-5018-40D2-A40F-12B1C7414D16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FF4E66C-5018-40D2-A40F-12B1C7414D16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FF4E66C-5018-40D2-A40F-12B1C7414D16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{218A8B93-95D0-464B-AFB7-C674293F1BA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{218A8B93-95D0-464B-AFB7-C674293F1BA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{218A8B93-95D0-464B-AFB7-C674293F1BA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{218A8B93-95D0-464B-AFB7-C674293F1BA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

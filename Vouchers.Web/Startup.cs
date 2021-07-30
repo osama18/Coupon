@@ -38,10 +38,15 @@ namespace Vouchers.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var configuration = new ConfigurationBuilder()
+          .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).Build();
+            services.AddSingleton<IConfigurationRoot>(configuration);
+
             services.AddControllers();
             services.RegisterCommon();
             services.RegisterBusiness();
             
+
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
