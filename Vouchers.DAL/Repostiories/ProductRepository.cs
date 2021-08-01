@@ -1,4 +1,6 @@
-﻿using Vouchers.DAL.DbContext;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using Vouchers.DAL.DbContext;
 using Vouchers.DAL.Entities;
 
 namespace Vouchers.DAL.Repostiories
@@ -9,6 +11,16 @@ namespace Vouchers.DAL.Repostiories
         public ProductRepository(IVouchersDbContext vouchersDbContext) : base(vouchersDbContext)
         {
             this.vouchersDbContext = vouchersDbContext;
+        }
+
+        public async Task<Product> GetByCode(string code)
+        {
+            var result = await vouchersDbContext
+              .Products
+              .Include(s => s.Deals)
+              .FirstOrDefaultAsync(s => s.Code == code);
+
+            return result;
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Vouchers.Web.Controllers
 
         [HttpGet]
         [Route("all")]
-        public async Task<ActionResult<ICollection<Voucher>>> Get(int count = 0)
+        public async Task<ActionResult<ICollection<VoucherDTO>>> Get([FromQuery] int count = 1000)
         {
             try
             {
@@ -53,8 +53,8 @@ namespace Vouchers.Web.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet]
-        [Route("get/{id}")]
-        public async Task<ActionResult<Voucher>> GetVoucherById([FromRoute] Guid id)
+        [Route("getbyid/{id}")]
+        public async Task<ActionResult<VoucherDTO>> GetVoucherById([FromRoute] Guid id)
         {
             try
             {
@@ -74,8 +74,8 @@ namespace Vouchers.Web.Controllers
         }
 
         [HttpGet]
-        [Route("get/{name}")]
-        public async Task<ActionResult<ICollection<Voucher>>> GetVouchersByName([FromRoute] string name)
+        [Route("getbyname/{name}")]
+        public async Task<ActionResult<ICollection<VoucherDTO>>> GetVouchersByName([FromRoute] string name)
         {
             try
             {
@@ -98,7 +98,7 @@ namespace Vouchers.Web.Controllers
 
         [HttpGet]
         [Route("search")]
-        public async Task<ActionResult<ICollection<Voucher>>> GetVouchersByNameSearch([FromQuery] string searchTerm)
+        public async Task<ActionResult<ICollection<VoucherDTO>>> GetVouchersByNameSearch([FromQuery] string searchTerm, [FromQuery] int take, [FromQuery] int skip = 0)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace Vouchers.Web.Controllers
                     return NotFound();
                 }
 
-                var vouchers = await voucherServices.Get(searchTerm);
+                var vouchers = await voucherServices.Search(searchTerm,take,skip);
 
                 return Ok(vouchers);
             }
@@ -121,19 +121,19 @@ namespace Vouchers.Web.Controllers
 
 
         [HttpGet]
-        [Route("getcheapest/{productcode}")]
-        public async Task<ActionResult<Voucher>> GetCheapestVoucherByProductCode([FromRoute] string productCode)
+        [Route("getcheapest/{code}")]
+        public async Task<ActionResult<VoucherDTO>> GetCheapestVoucherByProductCode([FromRoute] string code)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productCode))
+                if (string.IsNullOrWhiteSpace(code))
                 {
                     return NotFound();
                 }
 
-                var voucher = await voucherServices.GetCheapest(productCode);
+                var vouchers = await voucherServices.GetCheapest(code);
 
-                return Ok(voucher);
+                return Ok(vouchers);
             }
             catch (Exception ex)
             {

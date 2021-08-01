@@ -9,7 +9,8 @@ namespace Vouchers.Business
         public static IServiceCollection RegisterBusiness(this IServiceCollection collection)
         {
             collection.RegisterDal();
-            return collection.AddSingleton<IVoucherServices, VoucherServices>();
+            collection.AddAutoMapper(typeof(Mappers.AutoMapping));
+            return collection.AddTransient<IVoucherServices, VoucherServices>();
         }
     }
 }

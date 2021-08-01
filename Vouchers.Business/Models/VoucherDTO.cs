@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Vouchers.Business.Models
 {
-    public class Voucher
+    public class VoucherDTO
     {
         public Guid Id { get; set; }
 
@@ -10,6 +11,6 @@ namespace Vouchers.Business.Models
 
         public double Price { get; set; }
 
-        public string ProductCodes { get; set; }
+        public IEnumerable<ProductDTO> Products { get; set; }
     }
 }

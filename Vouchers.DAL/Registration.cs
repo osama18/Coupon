@@ -14,7 +14,7 @@ namespace Vouchers.DAL
             collection.AddTransient<IVouchersDbContext, VouchersDbContext>();
             collection.AddTransient<IProductRepository, ProductRepository>();
             collection.AddTransient<IDealRepository, DealRepository>(); 
-            collection.AddScoped<IVoucherRepository, VoucherRepository>();
+            collection.AddTransient<IVoucherRepository, VoucherRepository>();
 
             var migrateConnectionString = Environment.GetEnvironmentVariable("VouchersConnectionString");
             collection.AddDbContext<VouchersDbContext>(options =>

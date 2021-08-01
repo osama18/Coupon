@@ -1,8 +1,12 @@
-﻿using Vouchers.DAL.Entities;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Vouchers.DAL.Entities;
 
 namespace Vouchers.DAL.Repostiories
 {
     public interface IDealRepository : IGenericRepository<Deal>
     {
+        Task<ICollection<Deal>> RetriveByName(string name);
+        Task<ICollection<Deal>> SearchByName(string name);
     }
 }

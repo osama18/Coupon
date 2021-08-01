@@ -9,14 +9,14 @@ namespace Vouchers.Business.Repository
     {
         internal string DataFilename = $"{AppDomain.CurrentDomain.BaseDirectory}data.json";
 
-        private Voucher[] _vouchers;
+        private VoucherDTO[] _vouchers;
 
-        public virtual Voucher[] GetVouchers()
+        public virtual VoucherDTO[] GetVouchers()
         {
             if (_vouchers == null)
             {
                 var text = File.ReadAllText(DataFilename);
-                _vouchers = JsonConvert.DeserializeObject<Voucher[]>(text);
+                _vouchers = JsonConvert.DeserializeObject<VoucherDTO[]>(text);
             }
             return _vouchers;
         }

@@ -7,10 +7,10 @@ namespace Vouchers.Business.ApplicationServices
 {
     public interface IVoucherServices
     {
-        Task<ICollection<Voucher>> GetAll(int count = 0);
-        Task<Voucher> Get(System.Guid id);
-        Task<ICollection<Voucher>> Get(string name);
-        Task<ICollection<Voucher>> Search(string searchTerm);
-        Task<Voucher> GetCheapest(string productCode);
+        Task<ICollection<VoucherDTO>> GetAll(int take, int skip = 0);
+        Task<VoucherDTO> Get(System.Guid id);
+        Task<ICollection<VoucherDTO>> Get(string name);
+        Task<ICollection<VoucherDTO>> Search(string searchTerm, int take, int skip = 0);
+        Task<VoucherDTO> GetCheapest(string productCode);
     }
 }

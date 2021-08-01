@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Vouchers.DAL.DbContext;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Vouchers.DAL.Repostiories
 {
@@ -26,9 +27,9 @@ namespace Vouchers.DAL.Repostiories
         
         public async Task SaveAsync() => await vouchersDbContext.SaveChangesAsync();
 
-        public IEnumerable<T> RetrievePage(int take , int skip = 0)
+        public async Task<IEnumerable<T>> RetrievePage(int take , int skip = 0)
         {
-            return vouchersDbContext.Set<T>().Take(take).Skip(skip);
+            return await vouchersDbContext.Set<T>().Take(take).Skip(skip).ToListAsync();
         }
 
         public async Task<T> RetrieveById(long id)
