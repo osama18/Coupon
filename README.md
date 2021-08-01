@@ -1,4 +1,4 @@
-# Coupon
+For the questions please check Questions.PNG file
 
 Steps to run : 
 
