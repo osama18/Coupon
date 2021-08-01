@@ -11,6 +11,7 @@ using Vouchers.DAL.Repostiories;
 using Vouchers.LegacyModel;
 using Newtonsoft.Json;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace VouchersMigrationClient
 {
@@ -45,26 +46,44 @@ namespace VouchersMigrationClient
 
         static void RunSeeding()
         {
-            var repo = serviceProvider.GetService<IVoucherRepository>();
+            SeedDeals();
+            SeeVouchers();
+        }
 
+        private static void SeeVouchers()
+        {
+            var dealsRepo = serviceProvider.GetService<IDealRepository>();
+            
+        }
+
+        private static void SeedDeals()
+        {
+            var dealsRepo = serviceProvider.GetService<IDealRepository>();
+            var vouchersRepo = serviceProvider.GetService<IVoucherRepository>();
+            var csvData = File.ReadAllLines("Vouchers.csv")
+                    .Select(s => new
+                    {
+                        Name = s.Split('|')[0],
+                        Price = s.Split('|')[1],
+                        ProductCodes = s.Split('|')[2]
+                    }).ToArray();
+
+            var productDictionary = csvData.SelectMany(s => s.ProductCodes?.Split(',')).Distinct().Select(s => new Product { Code = s }).ToDictionary(x => x.Code); ;
             string dataFilename = $"{AppDomain.CurrentDomain.BaseDirectory}data.json";
             var text = File.ReadAllText(dataFilename);
             var legacyList = JsonConvert.DeserializeObject<VoucherLegacy[]>(text).ToList();
-            var vouchers = legacyList.Select(LegacyTraslator.VoucherLegacyToVoucher);
 
-            foreach (var voucher in vouchers)
+            var deals = csvData.Select(s => new Deal
             {
-                repo.InsertAsync(voucher).Wait();
-                try
-                {
-                    repo.SaveAsync().Wait();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Failed to write voucher with Id {voucher.Id}");
-                }
-            }
-            
+                Name = s.Name,
+                Price = double.Parse(s.Price),
+                Products = s.ProductCodes.Split(',').Select(s => productDictionary[s]).ToList(),
+                Vouchers = legacyList.Where(x => x.Name == s.Name).Select(r => new Voucher { ExternalId = r.Id}).ToList()
+            });
+
+
+            dealsRepo.InsertRangeAsync(deals).Wait();
+            dealsRepo.SaveAsync().Wait();
         }
     }
 }

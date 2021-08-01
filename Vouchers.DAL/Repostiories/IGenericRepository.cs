@@ -7,6 +7,8 @@ namespace Vouchers.DAL.Repostiories
 {
     public interface IGenericRepository<T> where T : Entity
     {
+        Task<T> RetrieveById(long id);
+        IEnumerable<T> RetrievePage(int take, int skip = 0);
         Task InsertAsync(T entity);
 
         Task InsertRangeAsync(IEnumerable<T> entities);

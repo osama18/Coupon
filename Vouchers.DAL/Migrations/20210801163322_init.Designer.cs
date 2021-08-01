@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vouchers.DAL.DbContext;
 
 namespace Vouchers.DAL.Migrations
 {
     [DbContext(typeof(VouchersDbContext))]
-    partial class VouchersDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210801163322_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,15 +45,12 @@ namespace Vouchers.DAL.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .HasDatabaseName("IX_Deal_DealName");
 
                     b.ToTable("Deal");
                 });
@@ -92,9 +91,6 @@ namespace Vouchers.DAL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DealId");
-
-                    b.HasIndex("ExternalId")
-                        .HasDatabaseName("IX_Voucher_ExternalID");
 
                     b.ToTable("Voucher");
                 });

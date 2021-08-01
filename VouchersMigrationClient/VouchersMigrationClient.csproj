@@ -41,4 +41,10 @@
     <ProjectReference Include="..\Vouchers.DAL\Vouchers.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Vouchers.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

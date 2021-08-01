@@ -11,17 +11,15 @@ namespace Vouchers.DAL.Configuration
             builder.HasKey(x => x.Id);
 
             builder.Property(e => e.Id)
-                .IsRequired();
+                .IsRequired()
+                .ValueGeneratedOnAdd();
 
-            builder.Property(s => s.Name)
-                .IsRequired();
+            builder.HasOne(x => x.Deal)
+                .WithMany(x => x.Vouchers)
+                .HasForeignKey(x => x.DealId);
 
-            builder.Property(s => s.Price)
-                .IsRequired();
-
-            builder.HasIndex(x => new { x.Name })
-                .HasDatabaseName("IX_Voucher_UniqueVoucher")
-                .IsUnique();
+            builder.HasIndex(x => new { x.ExternalId })
+            .HasDatabaseName("IX_Voucher_ExternalID");
         }
     }
 }

@@ -6,6 +6,6 @@ namespace Vouchers.DAL.Entities
 {
     public class Entity
     {
-        public Guid Id { get; set; }
+        public long Id { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Vouchers.DAL.DbContext;
+using System.Linq;
 
 namespace Vouchers.DAL.Repostiories
 {
@@ -18,12 +19,21 @@ namespace Vouchers.DAL.Repostiories
 
         public async Task InsertRangeAsync(IEnumerable<T> entities)
         {
-            foreach (var entity in entities)
-                await vouchersDbContext.AddAsync(entity);
+            await vouchersDbContext.AddRangeAsync(entities);
         }
 
         public void Update(Entity entity) => vouchersDbContext.Update(entity);
         
         public async Task SaveAsync() => await vouchersDbContext.SaveChangesAsync();
+
+        public IEnumerable<T> RetrievePage(int take , int skip = 0)
+        {
+            return vouchersDbContext.Set<T>().Take(take).Skip(skip);
+        }
+
+        public async Task<T> RetrieveById(long id)
+        {
+            return await vouchersDbContext.Set<T>().FindAsync(id);
+        }
     }
 }

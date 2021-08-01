@@ -22,8 +22,11 @@ namespace Vouchers.DAL.DbContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new DealConfiguration());
             modelBuilder.ApplyConfiguration(new VoucherConfiguration());
-            modelBuilder.ApplyConfiguration(new ProductCodeConfiguration());
+
 
             var cascadeFKs = modelBuilder.Model.GetEntityTypes()
                 .SelectMany(t => t.GetForeignKeys())
@@ -34,8 +37,9 @@ namespace Vouchers.DAL.DbContext
 
             
             modelBuilder.Entity<Voucher>().ToTable(nameof(Voucher));
-            modelBuilder.Entity<ProductCode>().ToTable(nameof(ProductCode));
-    }
+            modelBuilder.Entity<Product>().ToTable(nameof(Product));
+            modelBuilder.Entity<Deal>().ToTable(nameof(Deal));
+        }
 
         /// <summary>
         /// Gets or sets the Vouchere.
@@ -43,9 +47,15 @@ namespace Vouchers.DAL.DbContext
         public DbSet<Voucher> Vouchers { get; set; }
 
         /// <summary>
-        /// Gets or sets the Product Codes.
+        /// Gets or sets the Product.
         /// </summary>
-        public DbSet<ProductCode> ProductCodes { get; set; }
+        public DbSet<Product> Products { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Product Deals.
+        /// </summary>
+        public DbSet<Deal> Deals { get; set; }
+
 
         /// <summary>
         /// Saves the changes.
@@ -58,6 +68,8 @@ namespace Vouchers.DAL.DbContext
 
         public void Update(Entity entity) => base.Update(entity);
 
-        public async Task AddAsync(Entity entity) => await base.AddAsync(entity);
+        public async Task<long?> AddAsync(Entity entity) => (await base.AddAsync(entity))?.Entity?.Id;
+
+        public async Task AddRangeAsync(IEnumerable<Entity> entities) => await base.AddRangeAsync(entities);
     }
 }
