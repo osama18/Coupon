@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Vouchers.DAL.Repostiories
 {
-    internal abstract class GenericRepository<T> : IGenericRepository<T> where T : Entity
+    public abstract class GenericRepository<T> : IGenericRepository<T> where T : Entity
     {
         private readonly IVouchersDbContext vouchersDbContext;
 
@@ -36,5 +36,6 @@ namespace Vouchers.DAL.Repostiories
         {
             return await vouchersDbContext.Set<T>().FindAsync(id);
         }
+
     }
 }

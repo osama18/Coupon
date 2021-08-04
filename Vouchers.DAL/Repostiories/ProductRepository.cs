@@ -17,7 +17,6 @@ namespace Vouchers.DAL.Repostiories
         {
             var result = await vouchersDbContext
               .Products
-              .Include(s => s.Deals)
               .FirstOrDefaultAsync(s => s.Code == code);
 
             return result;

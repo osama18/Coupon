@@ -6,7 +6,7 @@ using Vouchers.DAL.Entities;
 
 namespace Vouchers.DAL.DbContext
 {
-    interface IVouchersDbContext
+    public interface IVouchersDbContext
     {
         EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
 

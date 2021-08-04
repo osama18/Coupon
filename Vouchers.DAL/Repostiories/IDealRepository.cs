@@ -8,5 +8,7 @@ namespace Vouchers.DAL.Repostiories
     {
         Task<ICollection<Deal>> RetriveByName(string name);
         Task<ICollection<Deal>> SearchByName(string name);
+
+        Task<Deal> GetCheapest(long productId);
     }
 }

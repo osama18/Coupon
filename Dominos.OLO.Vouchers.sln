@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vouchers.Business", "Vouche
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vouchers.DAL", "Vouchers.DAL\Vouchers.DAL.csproj", "{1FF4E66C-5018-40D2-A40F-12B1C7414D16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VouchersMigrationClient", "VouchersMigrationClient\VouchersMigrationClient.csproj", "{218A8B93-95D0-464B-AFB7-C674293F1BA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VouchersMigrationClient", "VouchersMigrationClient\VouchersMigrationClient.csproj", "{218A8B93-95D0-464B-AFB7-C674293F1BA6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vouchers.Generator", "Vouchers.Generator\Vouchers.Generator.csproj", "{A514A15A-B30D-45B5-AF02-E20DED89F954}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vouchers.Test", "Vouchers.Test\Vouchers.Test.csproj", "{2532808C-2894-40F0-A836-65AD813AE5F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{A514A15A-B30D-45B5-AF02-E20DED89F954}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A514A15A-B30D-45B5-AF02-E20DED89F954}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A514A15A-B30D-45B5-AF02-E20DED89F954}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2532808C-2894-40F0-A836-65AD813AE5F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2532808C-2894-40F0-A836-65AD813AE5F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2532808C-2894-40F0-A836-65AD813AE5F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2532808C-2894-40F0-A836-65AD813AE5F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
